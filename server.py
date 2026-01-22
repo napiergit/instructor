@@ -26,7 +26,7 @@ def how_to_add_mcp_to_toqan() -> str:
     
     Step 3: Fill in the Details
     - Name: Give your server a friendly name (like "Sum Calculator")
-    - URL: Enter the web address where your server is running (like "http://localhost:8000/mcp")
+    - URL: Enter the web address where your server is running
     - Protocol: Select "Streamable HTTP (Recommended)" from the dropdown
     - Authentication: Choose "None" if your server doesn't need a password
     
@@ -47,4 +47,4 @@ def how_to_add_mcp_to_toqan() -> str:
     """
 
 if __name__ == "__main__":
-    mcp.run(transport="sse")
+    mcp.run()
