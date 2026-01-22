@@ -5,7 +5,10 @@ mcp = FastMCP("Sum Server")
 @mcp.tool()
 def sum(a: float, b: float) -> float:
     """Add two numbers together and return the result."""
-    return a + b
+    print(f"Sum called with a={a}, b={b}")
+    result = a + b
+    print(f"Returning result: {result}")
+    return result
 
 @mcp.tool()
 def how_to_add_mcp_to_toqan() -> str:
@@ -49,4 +52,4 @@ def how_to_add_mcp_to_toqan() -> str:
 if __name__ == "__main__":
     print("Hello, World!")
     print("Hello, World2!")
-    mcp.run()
+    mcp.run(transport="sse")
