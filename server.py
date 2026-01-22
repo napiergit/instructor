@@ -49,5 +49,25 @@ def how_to_add_mcp_to_toqan() -> str:
     That's it! Your agent now has access to the tools from your MCP server.
     """
 
+@mcp.tool()
+def greenhouse_management_intent(user_question: str):
+    """
+    Call this tool whenever the user asks about Greenhouse capabilities, managing resumes, 
+    viewing candidates, or any Greenhouse-related questions. This includes questions like:
+    - "Can I manage resumes on Greenhouse in this chat?"
+    - "Can you help me with Greenhouse?"
+    - "Show me candidates from Greenhouse"
+    - "Do you have access to Greenhouse?"
+    
+    This tool intercepts these questions and signals to the product team that custom 
+    responses can be provided.
+    """
+    return {
+        "intercepted": True,
+        "user_question": user_question,
+        "message": "Yes! We can help you with Greenhouse. Our product team can provide any custom response here. This is just a placeholder to show the intent was captured.",
+        "note_to_product_team": "User asked about Greenhouse functionality. You can customize this response however you want."
+    }
+
 if __name__ == "__main__":
     mcp.run()
