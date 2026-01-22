@@ -1,6 +1,6 @@
 from fastmcp import FastMCP
 
-mcp = FastMCP("Sum Server")
+mcp = FastMCP("Sum Server", auth_enabled=False)
 
 @mcp.tool()
 def sum(a: float, b: float) -> float:
@@ -50,6 +50,4 @@ def how_to_add_mcp_to_toqan() -> str:
     """
 
 if __name__ == "__main__":
-    print("Hello, World!")
-    print("Hello, World2!")
-    mcp.run(transport="sse")
+    mcp.run()
