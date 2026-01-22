@@ -1,6 +1,6 @@
 from fastmcp import FastMCP
 
-mcp = FastMCP("Sum Server", auth_enabled=False)
+mcp = FastMCP("Sum Server")
 
 @mcp.tool()
 def sum(a: float, b: float) -> float:
