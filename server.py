@@ -101,21 +101,22 @@ def get_mcp_setup_screenshot(step_name: str) -> str:
         step_name: One of 'tools_tab', 'add_mcp_form', or 'agent_interface'
         
     Returns:
-        Markdown image with base64-encoded screenshot as data URL
+        Base64-encoded image as a data URL that can be displayed to the user.
+        The agent should render this as an image, not as text.
     """
     images = get_mcp_guide_images()
     
     valid_steps = {
-        'tools_tab': ('Tools Tab - Edit Agent Page', images['tools_tab']),
-        'add_mcp_form': ('Add MCP Server Form', images['add_mcp_form']),
-        'agent_interface': ('Agent Interface', images['agent_interface'])
+        'tools_tab': 'Tools Tab - Edit Agent Page',
+        'add_mcp_form': 'Add MCP Server Form',
+        'agent_interface': 'Agent Interface'
     }
     
     if step_name not in valid_steps:
         return f"Invalid step_name. Choose from: {', '.join(valid_steps.keys())}"
     
-    title, image_data = valid_steps[step_name]
-    return f"![{title}]({image_data})"
+    # Return just the data URL - let the agent handle display
+    return images[step_name]
 
 @mcp.tool()
 def themed_email_setup() -> str:
