@@ -29,14 +29,15 @@ def how_to_add_mcp_to_toqan() -> str:
 
 Follow these simple steps:
 
-![Tools Tab - Edit Agent Page]({MCP_SETUP_IMAGES['tools_tab']})
-
 ## Step 1: Open Your Agent Settings
+
+![Agent Interface with Start Conversation]({MCP_SETUP_IMAGES['agent_interface']})
+
 - Create a new Toqan agent or select to edit an existing agent
 - Click on the "Tools" tab at the top
 - Look for the "MCP servers" section
 
-![Add MCP Server Form]({MCP_SETUP_IMAGES['add_mcp_form']})
+![Tools Tab - Edit Agent Page]({MCP_SETUP_IMAGES['tools_tab']})
 
 ## Step 2: Click "Add MCP Server"
 - You'll see a purple button that says "Add MCP Server" (shown in screenshot above)
@@ -48,7 +49,7 @@ Follow these simple steps:
 - **Protocol**: Select "Streamable HTTP (Recommended)" from the dropdown
 - **Authentication**: Choose "None" if your server doesn't need a password
 
-![Agent Interface with Start Conversation]({MCP_SETUP_IMAGES['agent_interface']})
+![Add MCP Server Form]({MCP_SETUP_IMAGES['add_mcp_form']})
 
 ## Step 4: Confirm Safety
 - Check the two boxes at the bottom to confirm:
