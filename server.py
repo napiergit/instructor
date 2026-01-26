@@ -1,27 +1,14 @@
 from fastmcp import FastMCP
-from mcp_images import get_mcp_guide_images
 import os
 
 mcp = FastMCP("Sum Server")
 
-# Register image resources
-@mcp.resource("mcp-guide://agent-interface")
-def get_agent_interface_image() -> str:
-    """Screenshot showing the Toqan agent interface with Start conversation button."""
-    images = get_mcp_guide_images()
-    return images['agent_interface']
-
-@mcp.resource("mcp-guide://tools-tab")
-def get_tools_tab_image() -> str:
-    """Screenshot showing the Edit Agent page with Tools tab and Add MCP Server button."""
-    images = get_mcp_guide_images()
-    return images['tools_tab']
-
-@mcp.resource("mcp-guide://add-mcp-form")
-def get_add_mcp_form_image() -> str:
-    """Screenshot showing the Add MCP Server form with all configuration fields."""
-    images = get_mcp_guide_images()
-    return images['add_mcp_form']
+# Image URLs hosted on Imgur
+MCP_SETUP_IMAGES = {
+    'tools_tab': 'https://imgur.com/uTMNzV1',
+    'add_mcp_form': 'https://imgur.com/WcpI0y6',
+    'agent_interface': 'https://imgur.com/Up6LeKi'
+}
 
 @mcp.tool()
 def sum(a: float, b: float) -> float:
@@ -33,16 +20,12 @@ def sum(a: float, b: float) -> float:
 
 @mcp.tool()
 def how_to_add_mcp_to_toqan() -> str:
-    """Get step-by-step instructions on how to add an MCP server to Toqan.
+    """Get step-by-step instructions with visual guides on how to add an MCP server to Toqan.
     
-    Returns detailed text instructions. It is STRONGLY RECOMMENDED to also call the 
-    get_mcp_setup_screenshot tool to display visual screenshots alongside these instructions.
-    Available screenshots: 'tools_tab', 'add_mcp_form', 'agent_interface'.
+    Returns markdown-formatted instructions with embedded screenshot images.
     """
     
-    instructions = """# How to Add an MCP Server to Toqan - Easy Guide
-
-⚠️ **Important**: This guide includes visual screenshots. It is strongly recommended to call `get_mcp_setup_screenshot()` for each step to see the actual UI.
+    instructions = f"""# How to Add an MCP Server to Toqan - Easy Guide
 
 Follow these simple steps:
 
@@ -51,15 +34,15 @@ Follow these simple steps:
 - Click on the "Tools" tab at the top
 - Look for the "MCP servers" section
 
-📸 **Screenshot available**: Call `get_mcp_setup_screenshot("tools_tab")` to see this step
+![Tools Tab - Edit Agent Page]({MCP_SETUP_IMAGES['tools_tab']})
 
 ## Step 2: Click "Add MCP Server"
-- You'll see a purple button that says "Add MCP Server"
+- You'll see a purple button that says "Add MCP Server" (shown in screenshot above)
 - Click it to open the setup form
 
 ## Step 3: Fill in the Details
 
-📸 **Screenshot available**: Call `get_mcp_setup_screenshot("add_mcp_form")` to see the form
+![Add MCP Server Form]({MCP_SETUP_IMAGES['add_mcp_form']})
 
 - **Name**: Give your server a friendly name (like "Sum Calculator")
 - **URL**: Enter the web address where your server is running
@@ -72,7 +55,7 @@ Follow these simple steps:
   - ✓ This MCP won't read sensitive information
 
 ## Step 5: Save
-- Click the purple "Save" button
+- Click the purple "Save" button (shown in form above)
 - Your MCP server is now connected!
 
 ## Step 6: Publish Your Changes
@@ -81,7 +64,7 @@ Follow these simple steps:
 
 ## Step 7: Test It Out
 
-📸 **Screenshot available**: Call `get_mcp_setup_screenshot("agent_interface")` to see the interface
+![Agent Interface with Start Conversation]({MCP_SETUP_IMAGES['agent_interface']})
 
 - Start a new conversation with your agent
 - Try using the tools from your MCP server!
@@ -101,10 +84,8 @@ def get_mcp_setup_screenshot(step_name: str) -> str:
         step_name: One of 'tools_tab', 'add_mcp_form', or 'agent_interface'
         
     Returns:
-        HTML with embedded base64 image that should be rendered to the user.
+        Markdown image with URL to the screenshot hosted on Imgur.
     """
-    images = get_mcp_guide_images()
-    
     valid_steps = {
         'tools_tab': 'Tools Tab - Edit Agent Page',
         'add_mcp_form': 'Add MCP Server Form',
@@ -115,10 +96,9 @@ def get_mcp_setup_screenshot(step_name: str) -> str:
         return f"Invalid step_name. Choose from: {', '.join(valid_steps.keys())}"
     
     title = valid_steps[step_name]
-    data_url = images[step_name]
+    image_url = MCP_SETUP_IMAGES[step_name]
     
-    # Return HTML img tag
-    return f'<img src="{data_url}" alt="{title}" style="max-width: 100%; height: auto;" />'
+    return f'![{title}]({image_url})'
 
 @mcp.tool()
 def themed_email_setup() -> str:
