@@ -33,15 +33,16 @@ def sum(a: float, b: float) -> float:
 
 @mcp.tool()
 def how_to_add_mcp_to_toqan() -> str:
-    """Get step-by-step instructions with visual guides on how to add an MCP server to Toqan.
+    """Get step-by-step instructions on how to add an MCP server to Toqan.
     
-    Returns markdown-formatted instructions with embedded screenshot images as base64 data URLs.
-    The images are embedded directly so they can be displayed inline by the agent.
+    Returns detailed text instructions. It is STRONGLY RECOMMENDED to also call the 
+    get_mcp_setup_screenshot tool to display visual screenshots alongside these instructions.
+    Available screenshots: 'tools_tab', 'add_mcp_form', 'agent_interface'.
     """
     
-    images = get_mcp_guide_images()
-    
-    instructions = f"""# How to Add an MCP Server to Toqan - Easy Guide
+    instructions = """# How to Add an MCP Server to Toqan - Easy Guide
+
+⚠️ **Important**: This guide includes visual screenshots. It is strongly recommended to call `get_mcp_setup_screenshot()` for each step to see the actual UI.
 
 Follow these simple steps:
 
@@ -50,15 +51,15 @@ Follow these simple steps:
 - Click on the "Tools" tab at the top
 - Look for the "MCP servers" section
 
-![Tools Tab - Edit Agent Page]({images['tools_tab']})
+📸 **Screenshot available**: Call `get_mcp_setup_screenshot("tools_tab")` to see this step
 
 ## Step 2: Click "Add MCP Server"
-- You'll see a purple button that says "Add MCP Server" (shown in screenshot above)
+- You'll see a purple button that says "Add MCP Server"
 - Click it to open the setup form
 
 ## Step 3: Fill in the Details
 
-![Add MCP Server Form]({images['add_mcp_form']})
+📸 **Screenshot available**: Call `get_mcp_setup_screenshot("add_mcp_form")` to see the form
 
 - **Name**: Give your server a friendly name (like "Sum Calculator")
 - **URL**: Enter the web address where your server is running
@@ -71,7 +72,7 @@ Follow these simple steps:
   - ✓ This MCP won't read sensitive information
 
 ## Step 5: Save
-- Click the purple "Save" button (shown in form above)
+- Click the purple "Save" button
 - Your MCP server is now connected!
 
 ## Step 6: Publish Your Changes
@@ -80,7 +81,7 @@ Follow these simple steps:
 
 ## Step 7: Test It Out
 
-![Agent Interface with Start Conversation]({images['agent_interface']})
+📸 **Screenshot available**: Call `get_mcp_setup_screenshot("agent_interface")` to see the interface
 
 - Start a new conversation with your agent
 - Try using the tools from your MCP server!
@@ -91,6 +92,30 @@ Follow these simple steps:
 """
     
     return instructions.strip()
+
+@mcp.tool()
+def get_mcp_setup_screenshot(step_name: str) -> str:
+    """Get a screenshot for a specific step of the MCP setup process.
+    
+    Args:
+        step_name: One of 'tools_tab', 'add_mcp_form', or 'agent_interface'
+        
+    Returns:
+        Markdown image with base64-encoded screenshot as data URL
+    """
+    images = get_mcp_guide_images()
+    
+    valid_steps = {
+        'tools_tab': ('Tools Tab - Edit Agent Page', images['tools_tab']),
+        'add_mcp_form': ('Add MCP Server Form', images['add_mcp_form']),
+        'agent_interface': ('Agent Interface', images['agent_interface'])
+    }
+    
+    if step_name not in valid_steps:
+        return f"Invalid step_name. Choose from: {', '.join(valid_steps.keys())}"
+    
+    title, image_data = valid_steps[step_name]
+    return f"![{title}]({image_data})"
 
 @mcp.tool()
 def themed_email_setup() -> str:
