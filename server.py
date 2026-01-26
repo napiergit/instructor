@@ -1,7 +1,27 @@
 from fastmcp import FastMCP
 from mcp_images import get_mcp_guide_images
+import os
 
 mcp = FastMCP("Sum Server")
+
+# Register image resources
+@mcp.resource("mcp-guide://agent-interface")
+def get_agent_interface_image() -> str:
+    """Screenshot showing the Toqan agent interface with Start conversation button."""
+    images = get_mcp_guide_images()
+    return images['agent_interface']
+
+@mcp.resource("mcp-guide://tools-tab")
+def get_tools_tab_image() -> str:
+    """Screenshot showing the Edit Agent page with Tools tab and Add MCP Server button."""
+    images = get_mcp_guide_images()
+    return images['tools_tab']
+
+@mcp.resource("mcp-guide://add-mcp-form")
+def get_add_mcp_form_image() -> str:
+    """Screenshot showing the Add MCP Server form with all configuration fields."""
+    images = get_mcp_guide_images()
+    return images['add_mcp_form']
 
 @mcp.tool()
 def sum(a: float, b: float) -> float:
@@ -12,66 +32,68 @@ def sum(a: float, b: float) -> float:
     return result
 
 @mcp.tool()
-def how_to_add_mcp_to_toqan() -> dict:
+def how_to_add_mcp_to_toqan() -> str:
     """Get step-by-step instructions with visual guides on how to add an MCP server to Toqan.
     
-    Returns a structured response containing:
-    - instructions: Step-by-step text guide
-    - images: Dictionary of base64-encoded screenshots showing the UI
-      - agent_interface: Shows the agent card with "Start conversation" button
-      - tools_tab: Shows the Edit Agent page with Tools tab and "Add MCP Server" button
-      - add_mcp_form: Shows the Add MCP Server form with all fields
+    This tool provides detailed setup instructions. Visual screenshots are available as MCP resources:
+    - mcp-guide://tools-tab - Shows the Edit Agent page with Tools tab
+    - mcp-guide://add-mcp-form - Shows the Add MCP Server form
+    - mcp-guide://agent-interface - Shows the agent interface
     
-    When presenting this to the user, display the images inline with the instructions.
-    The images are returned as data URLs (data:image/png;base64,...) that can be directly
-    embedded in HTML img tags or displayed in markdown.
+    The agent should fetch and display these resources alongside the instructions.
     """
     
     instructions = """
-How to Add an MCP Server to Toqan - Easy Guide
+# How to Add an MCP Server to Toqan - Easy Guide
 
 Follow these simple steps:
 
-Step 1: Open Your Agent Settings
+## Step 1: Open Your Agent Settings
 - Create a new Toqan agent or select to edit an existing agent
-- Click on the "Tools" tab at the top (see screenshot: tools_tab)
+- Click on the "Tools" tab at the top
 - Look for the "MCP servers" section
 
-Step 2: Click "Add MCP Server"
-- You'll see a purple button that says "Add MCP Server" (see screenshot: tools_tab)
+📸 **Visual Reference**: See resource `mcp-guide://tools-tab`
+
+## Step 2: Click "Add MCP Server"
+- You'll see a purple button that says "Add MCP Server" (shown in screenshot above)
 - Click it to open the setup form
 
-Step 3: Fill in the Details (see screenshot: add_mcp_form)
-- Name: Give your server a friendly name (like "Sum Calculator")
-- URL: Enter the web address where your server is running
-- Protocol: Select "Streamable HTTP (Recommended)" from the dropdown
-- Authentication: Choose "None" if your server doesn't need a password
+## Step 3: Fill in the Details
 
-Step 4: Confirm Safety (see screenshot: add_mcp_form)
+📸 **Visual Reference**: See resource `mcp-guide://add-mcp-form`
+
+- **Name**: Give your server a friendly name (like "Sum Calculator")
+- **URL**: Enter the web address where your server is running
+- **Protocol**: Select "Streamable HTTP (Recommended)" from the dropdown
+- **Authentication**: Choose "None" if your server doesn't need a password
+
+## Step 4: Confirm Safety
 - Check the two boxes at the bottom to confirm:
-  ✓ This MCP is from a trusted source
-  ✓ This MCP won't read sensitive information
+  - ✓ This MCP is from a trusted source
+  - ✓ This MCP won't read sensitive information
 
-Step 5: Save
-- Click the purple "Save" button (see screenshot: add_mcp_form)
+## Step 5: Save
+- Click the purple "Save" button (shown in form above)
 - Your MCP server is now connected!
 
-Step 6: Publish Your Changes
+## Step 6: Publish Your Changes
 - Click the "Publish" button at the bottom right
 - Your agent can now use the new tools!
 
-Step 7: Test It Out (see screenshot: agent_interface)
+## Step 7: Test It Out
+
+📸 **Visual Reference**: See resource `mcp-guide://agent-interface`
+
 - Start a new conversation with your agent
 - Try using the tools from your MCP server!
 
-That's it! Your agent now has access to the tools from your MCP server.
+---
+
+**That's it!** Your agent now has access to the tools from your MCP server.
     """
     
-    return {
-        "instructions": instructions.strip(),
-        "images": get_mcp_guide_images(),
-        "display_hint": "Show images inline with instructions. Reference images by their keys: agent_interface, tools_tab, add_mcp_form"
-    }
+    return instructions.strip()
 
 @mcp.tool()
 def themed_email_setup() -> str:
