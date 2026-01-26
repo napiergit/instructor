@@ -5,9 +5,9 @@ mcp = FastMCP("Sum Server")
 
 # Image URLs hosted on Imgur
 MCP_SETUP_IMAGES = {
-    'tools_tab': 'https://i.imgur.com/uTMNzV1.png',
-    'add_mcp_form': 'https://i.imgur.com/WcpI0y6.png',
-    'agent_interface': 'https://i.imgur.com/Up6LeKi.png'
+    'add_mcp_form': 'https://i.imgur.com/uTMNzV1.png',
+    'agent_interface': 'https://i.imgur.com/WcpI0y6.png',
+    'tools_tab': 'https://i.imgur.com/Up6LeKi.png'
 }
 
 @mcp.tool()
@@ -29,25 +29,26 @@ def how_to_add_mcp_to_toqan() -> str:
 
 Follow these simple steps:
 
+![Tools Tab - Edit Agent Page]({MCP_SETUP_IMAGES['tools_tab']})
+
 ## Step 1: Open Your Agent Settings
 - Create a new Toqan agent or select to edit an existing agent
 - Click on the "Tools" tab at the top
 - Look for the "MCP servers" section
 
-![Tools Tab - Edit Agent Page]({MCP_SETUP_IMAGES['tools_tab']})
+![Add MCP Server Form]({MCP_SETUP_IMAGES['add_mcp_form']})
 
 ## Step 2: Click "Add MCP Server"
 - You'll see a purple button that says "Add MCP Server" (shown in screenshot above)
 - Click it to open the setup form
 
 ## Step 3: Fill in the Details
-
-![Add MCP Server Form]({MCP_SETUP_IMAGES['add_mcp_form']})
-
 - **Name**: Give your server a friendly name (like "Sum Calculator")
 - **URL**: Enter the web address where your server is running
 - **Protocol**: Select "Streamable HTTP (Recommended)" from the dropdown
 - **Authentication**: Choose "None" if your server doesn't need a password
+
+![Agent Interface with Start Conversation]({MCP_SETUP_IMAGES['agent_interface']})
 
 ## Step 4: Confirm Safety
 - Check the two boxes at the bottom to confirm:
@@ -63,9 +64,6 @@ Follow these simple steps:
 - Your agent can now use the new tools!
 
 ## Step 7: Test It Out
-
-![Agent Interface with Start Conversation]({MCP_SETUP_IMAGES['agent_interface']})
-
 - Start a new conversation with your agent
 - Try using the tools from your MCP server!
 
