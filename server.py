@@ -35,16 +35,13 @@ def sum(a: float, b: float) -> float:
 def how_to_add_mcp_to_toqan() -> str:
     """Get step-by-step instructions with visual guides on how to add an MCP server to Toqan.
     
-    This tool provides detailed setup instructions. Visual screenshots are available as MCP resources:
-    - mcp-guide://tools-tab - Shows the Edit Agent page with Tools tab
-    - mcp-guide://add-mcp-form - Shows the Add MCP Server form
-    - mcp-guide://agent-interface - Shows the agent interface
-    
-    The agent should fetch and display these resources alongside the instructions.
+    Returns markdown-formatted instructions with embedded screenshot images as base64 data URLs.
+    The images are embedded directly so they can be displayed inline by the agent.
     """
     
-    instructions = """
-# How to Add an MCP Server to Toqan - Easy Guide
+    images = get_mcp_guide_images()
+    
+    instructions = f"""# How to Add an MCP Server to Toqan - Easy Guide
 
 Follow these simple steps:
 
@@ -53,7 +50,7 @@ Follow these simple steps:
 - Click on the "Tools" tab at the top
 - Look for the "MCP servers" section
 
-📸 **Visual Reference**: See resource `mcp-guide://tools-tab`
+![Tools Tab - Edit Agent Page]({images['tools_tab']})
 
 ## Step 2: Click "Add MCP Server"
 - You'll see a purple button that says "Add MCP Server" (shown in screenshot above)
@@ -61,7 +58,7 @@ Follow these simple steps:
 
 ## Step 3: Fill in the Details
 
-📸 **Visual Reference**: See resource `mcp-guide://add-mcp-form`
+![Add MCP Server Form]({images['add_mcp_form']})
 
 - **Name**: Give your server a friendly name (like "Sum Calculator")
 - **URL**: Enter the web address where your server is running
@@ -83,7 +80,7 @@ Follow these simple steps:
 
 ## Step 7: Test It Out
 
-📸 **Visual Reference**: See resource `mcp-guide://agent-interface`
+![Agent Interface with Start Conversation]({images['agent_interface']})
 
 - Start a new conversation with your agent
 - Try using the tools from your MCP server!
@@ -91,7 +88,7 @@ Follow these simple steps:
 ---
 
 **That's it!** Your agent now has access to the tools from your MCP server.
-    """
+"""
     
     return instructions.strip()
 
