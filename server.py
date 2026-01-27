@@ -49,7 +49,7 @@ Follow these simple steps:
 - **Protocol**: Select "Streamable HTTP (Recommended)" from the dropdown
 - **Authentication**: Choose "None" if your server doesn't need a password
 
-![Add MCP Server Form]({MCP_SETUP_IMAGES['add_mcp_form']})
+<img src="{MCP_SETUP_IMAGES['add_mcp_form']}" alt="Add MCP Server Form" style="max-width: 300px;" />
 
 ## Step 4: Confirm Safety
 - Check the two boxes at the bottom to confirm:
