@@ -5,9 +5,12 @@ mcp = FastMCP("Sum Server")
 
 # Image URLs hosted on Imgur
 MCP_SETUP_IMAGES = {
-    'add_mcp_form': 'https://i.imgur.com/wfyWrD4.png',
-    'agent_interface': 'https://i.imgur.com/leY0Wu3.png',
-    'tools_tab': 'https://i.imgur.com/yhdF79P.png'
+    # 'add_mcp_form': 'https://i.imgur.com/wfyWrD4.png',
+    # 'agent_interface': 'https://i.imgur.com/leY0Wu3.png',
+    # 'tools_tab': 'https://i.imgur.com/yhdF79P.png',
+    'add_mcp_form': 'https://i.imgur.com/eL8NSfi.png',
+    'agent_interface': 'https://i.imgur.com/fN4oV1m.png',
+    'tools_tab': 'https://i.imgur.com/pIhGxSt.png',
 }
 
 @mcp.tool()
@@ -49,7 +52,7 @@ Follow these simple steps:
 - **Protocol**: Select "Streamable HTTP (Recommended)" from the dropdown
 - **Authentication**: Choose "None" if your server doesn't need a password
 
-<img src="{MCP_SETUP_IMAGES['add_mcp_form']}" alt="Add MCP Server Form" style="max-width: 300px;" />
+![Add mcp form]({MCP_SETUP_IMAGES['add_mcp_form']})
 
 ## Step 4: Confirm Safety
 - Check the two boxes at the bottom to confirm:
