@@ -5,9 +5,9 @@ mcp = FastMCP("Sum Server")
 
 # Image URLs hosted on Imgur
 MCP_SETUP_IMAGES = {
-    'add_mcp_form': 'https://i.imgur.com/uTMNzV1.png',
-    'agent_interface': 'https://i.imgur.com/WcpI0y6.png',
-    'tools_tab': 'https://i.imgur.com/Up6LeKi.png'
+    'add_mcp_form': 'https://i.imgur.com/wfyWrD4.png',
+    'agent_interface': 'https://i.imgur.com/leY0Wu3.png',
+    'tools_tab': 'https://i.imgur.com/yhdF79P.png'
 }
 
 @mcp.tool()
