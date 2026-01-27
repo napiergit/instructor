@@ -155,54 +155,65 @@ def lever_integration_setup() -> str:
     
     Get step-by-step instructions on how to add the Lever MCP server to Toqan for recruiting integration.
     """
-    return """
-    How to Add the Lever MCP Server to Toqan
+    return f"""# How to Add the Lever MCP Server to Toqan
     
-    Follow these simple steps:
+Follow these simple steps:
     
-    Pre-Step: Register on Okta
-    - Before you can use the Lever MCP, you need to register on another Okta account
-    - Contact your IT team to get access to the Okta account required for Lever integration
-    - Complete the registration process before proceeding to Step 1
+## Pre-Step: Register on Okta
+- Before you can use the Lever MCP, you need to register on another Okta account
+- Contact your IT team to get access to the Okta account required for Lever integration
+- Complete the registration process before proceeding to Step 1
     
-    Step 1: Open Your Agent Settings
-    - Create a new Toqan agent or select to edit an existing agent
-    - Click on the "Tools" tab at the top
-    - Look for the "MCP servers" section
+## Step 1: Open Your Agent Settings
+
+![Agent Interface with Start Conversation]({MCP_SETUP_IMAGES['agent_interface']})
+
+- Create a new Toqan agent or select to edit an existing agent
+- Click on the "Tools" tab at the top
+- Look for the "MCP servers" section
+
+![Tools Tab - Edit Agent Page]({MCP_SETUP_IMAGES['tools_tab']})
     
-    Step 2: Click "Add MCP Server"
-    - You'll see a purple button that says "Add MCP Server"
-    - Click it to open the setup form
+## Step 2: Click "Add MCP Server"
+- You'll see a purple button that says "Add MCP Server" (shown in screenshot above)
+- Click it to open the setup form
     
-    Step 3: Fill in the Details
-    - Name: Lever MCP
-    - URL: https://mcp.prosus.com/mcp
-    - Protocol: Select "Streamable HTTP (Recommended)" from the dropdown
-    - Authentication: Select "OAuth" from the dropdown
-    - Client ID: Enter the Client ID provided by your IT team
-      (You need to obtain this from your IT team - they will provide OAuth credentials for Lever integration)
-    - Client Secret: Enter the Client Secret provided by your IT team
-      (This is a secure credential that must be kept confidential)
+## Step 3: Fill in the Details
+- **Name**: Lever MCP
+- **URL**: https://mcp.prosus.com/mcp
+- **Protocol**: Select "Streamable HTTP (Recommended)" from the dropdown
+- **Authentication**: Select "OAuth" from the dropdown
+- **Client ID**: Enter the Client ID provided by your IT team
+  (You need to obtain this from your IT team - they will provide OAuth credentials for Lever integration)
+- **Client Secret**: Enter the Client Secret provided by your IT team
+  (This is a secure credential that must be kept confidential)
+
+![Add mcp form]({MCP_SETUP_IMAGES['add_mcp_form']})
+
+**Note:** Implementing a DCR (Dynamic Client Registration) feature in this MCP would alleviate 
+the need for manually obtaining and entering Client ID and Client Secret from the IT team.
     
-    Note: Implementing a DCR (Dynamic Client Registration) feature in this MCP would alleviate 
-    the need for manually obtaining and entering Client ID and Client Secret from the IT team.
+## Step 4: Confirm Safety
+- Check the two boxes at the bottom to confirm:
+  - ✓ This MCP is from a trusted source
+  - ✓ This MCP won't read sensitive information
     
-    Step 4: Confirm Safety
-    - Check the two boxes at the bottom to confirm:
-      ✓ This MCP is from a trusted source
-      ✓ This MCP won't read sensitive information
+## Step 5: Save
+- Click the purple "Save" button (shown in form above)
+- Your MCP server is now connected!
     
-    Step 5: Save
-    - Click the purple "Save" button
-    - Your MCP server is now connected!
-    
-    Step 6: Publish Your Changes
-    - Click the "Publish" button at the bottom right
-    - Your agent can now use the Lever recruiting tools!
-    
-    That's it! Your agent now has access to Lever for managing candidates and recruiting workflows.
-    Start a new chat using the selected agent and try it out!
-    """
+## Step 6: Publish Your Changes
+- Click the "Publish" button at the bottom right
+- Your agent can now use the Lever recruiting tools!
+
+## Step 7: Test It Out
+- Start a new conversation with your agent
+- Try using the Lever recruiting tools!
+
+---
+
+**That's it!** Your agent now has access to Lever for managing candidates and recruiting workflows.
+"""
 
 @mcp.tool()
 def greenhouse_management_intent(user_question: str):
